@@ -1,13 +1,13 @@
 <template>
 	<v-layout row wrap>
-	  <v-flex xs12 sm12 md12>
+	  <v-flex>
 	    <v-card>
 	      <v-card-text style="height: 300px;" class="">Hello World!</v-card-text>
 	      <v-card-text style="height: 100px; position: relative">
 			<v-speed-dial
-			  absolute="true"
-			  bottom="true"
-			  right="true"
+			  absolute
+			  bottom
+			  right
 			  direction="top"
 			  transition="slide-y-reverse-transition"
 			>
@@ -17,7 +17,6 @@
 			    dark
 			    fab
 			    hover
-			    v-model="fab"
 			  >
 			    <v-icon>reorder</v-icon>
 			    <v-icon>close</v-icon>
@@ -27,6 +26,7 @@
 			    dark
 			    small
 			    class="indigo"
+			    to="/sales/add"
 			  >
 			    <v-icon>add</v-icon>
 			  </v-btn>			  
@@ -55,7 +55,13 @@
 	</v-layout>
 </template>
 
-
 <script>
-
+	export default {
+		props: ['activeComponent'],
+		methods: {
+			changeComponent: function(value) {
+				this.$emit('componentChanged', value);
+			}
+		}
+	}
 </script>

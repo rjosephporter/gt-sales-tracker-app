@@ -1,5 +1,5 @@
 <template>
-  <v-app id="example-1" toolbar footer dark>
+  <v-app toolbar footer dark>
     <v-navigation-drawer
       persistent
       v-model="drawer"
@@ -9,7 +9,7 @@
       dark
     >
       <v-list two-line>
-        <v-list-tile @click="" v-for="menuItem in mainMenu">
+        <v-list-tile v-for="(menuItem, ndx) in mainMenu" :key="ndx" :to="menuItem.route">
           <v-list-tile-action>
             <v-icon>{{ menuItem.icon }}</v-icon>
           </v-list-tile-action>
@@ -26,7 +26,9 @@
     <main>
       <v-container fluid>
         <!--v-router-->
-        <app-sales-index></app-sales-index>
+        <transition enter-active-class="animated fadeIn" leave-active-class="animated fadeOut" mode="out-in">
+          <router-view></router-view>
+        </transition>
       </v-container>
     </main>
     <v-footer dark>
@@ -36,21 +38,24 @@
 </template>
 
 <script>
-  import SalesIndex from './Sales/Index.vue';
-
   export default {
     data () {
       return {
         drawer: false,
         mainMenu: [
-          { icon: 'home', title: 'Home', action: null },
-          { icon: 'account_balance_wallet', title: 'Sales', action: null },
-          { icon: 'payment', title: 'Expenses', action: null },
+          { icon: 'home', title: 'Home', route: '/sales' },
+          { icon: 'account_balance_wallet', title: 'Sales', route: '/sales' },
+          { icon: 'payment', title: 'Expenses', route: '/sales/add' },
         ]
       }
     },
     components: {
-      'appSalesIndex': SalesIndex
+
+    },
+    methods: {
+      changeComponent: function(value) {
+        this.activeComponent = value;
+      }
     }
   }
 </script>
