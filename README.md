@@ -1,4 +1,4 @@
-# gt-sales-tracker-app
+# gt-sales-tracker-app (WIP)
 
 > A simple web application for tracking sales and expenses of Internet Cafe
 
