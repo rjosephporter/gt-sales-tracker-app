@@ -2,7 +2,7 @@
 	<v-layout row wrap>
 	  <v-flex>
 	  	<v-card>
-	  		<v-card-title>Add Sales</v-card-title>
+	  		<v-card-title>Add Expense</v-card-title>
 	  		<v-card-text>
 				<form>
 				<v-menu
@@ -18,7 +18,7 @@
 					<v-text-field
 						slot="activator"
 						label="Date"
-						v-model="sales.date"
+						v-model="expense.date"
 						:error-messages="errors.collect('Date')"
 						v-validate="'required|date_format:YYYY-MM-DD'"
 				  		data-vv-name="Date"
@@ -26,7 +26,7 @@
 						>
 					</v-text-field>
 					<v-date-picker 
-						v-model="sales.date" 
+						v-model="expense.date" 
 						no-title 
 						scrollable
 						dark 
@@ -40,35 +40,27 @@
 						</template>
 					</v-date-picker>						
 				</v-menu>
-				<v-select
-	              v-bind:items="shifts"
-	              item-value="id"
-	              item-text="name"
-	              v-model="sales.shift_id"
-	              label="Shift"
-				  :error-messages="errors.collect('Shift')"
-				  v-validate="'required|digits:1|between:1,2'"
-				  data-vv-name="Shift"            
-            	></v-select>
+				<v-text-field
+					label="Name"
+					v-model="expense.name"
+					:error-messages="errors.collect('Name')"
+					v-validate="'required'"
+					data-vv-name="Name"
+					></v-text-field>
             	<v-text-field
 	              label="Amount"
-	              v-model="sales.amount"
+	              v-model="expense.amount"
 	              prefix="₱"
 				  :error-messages="errors.collect('Amount')"
 				  v-validate="'required|decimal:2'"
 				  data-vv-name="Amount"		              
 	            ></v-text-field>
 				<v-text-field
-	                v-model="sales.remarks"
+	                v-model="expense.remarks"
 	                label="Remarks"
 	                textarea
 	                rows="2"
-	            ></v-text-field>
-				<v-checkbox
-				  v-model="sales.none"
-				  value="1"
-				  label="No sales for this date"
-				></v-checkbox>	            
+	            ></v-text-field>	            
 
 				<v-btn error @click="clear">clear</v-btn>
 				<v-btn success @click="submit">submit</v-btn>
@@ -86,16 +78,11 @@
     data () {
       return {
       	dateMenu: false,
-      	shifts: [
-      		{ id: 1, name: 'First Shift' },
-      		{ id: 2, name: 'Second Shift' }
-      	],
-      	sales: {
+      	expense: {
       		date: this.moment().format('YYYY-MM-DD'),
-      		shift_id: '',
+      		name: '',
       		amount: '',
-      		remarks: '',
-      		none: ''
+      		remarks: ''
       	}
       }
     },
@@ -105,19 +92,18 @@
         this.$validator.validateAll().then(function(valid) {
         	if(valid) {
         		console.log('valid');
-        		console.log(vm.sales);
+        		console.log(vm.expense);
         	} else {
         		console.log('invalid');
         	}
         });   
       },
       clear () {
-        this.sales.date = '';
-        this.sales.shift_id = '';
-        this.sales.amount = '';
-        this.sales.remarks = '';
-        this.sales.none = '';
-        this.$validator.reset()
+        this.expense.date = '';
+        this.expense.name = '';
+        this.expense.amount = '';
+        this.expense.remarks = '';
+        this.$validator.reset();
       }
     }
   }

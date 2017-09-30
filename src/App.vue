@@ -9,7 +9,7 @@
       dark
     >
       <v-list two-line>
-        <v-list-tile v-for="(menuItem, ndx) in mainMenu" :key="ndx" :to="menuItem.route">
+        <v-list-tile v-for="(menuItem, ndx) in mainMenu" :key="ndx" :to="menuItem.route" exact>
           <v-list-tile-action>
             <v-icon>{{ menuItem.icon }}</v-icon>
           </v-list-tile-action>
@@ -43,9 +43,9 @@
       return {
         drawer: false,
         mainMenu: [
-          { icon: 'home', title: 'Home', route: '/sales' },
+          { icon: 'home', title: 'Home', route: '/' },
           { icon: 'account_balance_wallet', title: 'Sales', route: '/sales' },
-          { icon: 'payment', title: 'Expenses', route: '/sales/add' },
+          { icon: 'payment', title: 'Expenses', route: '/expenses' },
         ]
       }
     },
