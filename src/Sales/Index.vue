@@ -17,7 +17,7 @@
 			      <td class="text-xs-left">{{ props.item.remarks }}</td>
 			      <td class="text-xs-right">{{ props.item.total }}</td>	
 			      <td class="text-xs-center">
-			      	<v-btn icon class="blue--text text--lighten-2">
+			      	<v-btn icon class="blue--text text--lighten-2" :to="'/sales/' + props.item.id + '/edit'">
 			      		<v-icon>edit</v-icon>
 			      	</v-btn>
 					<v-btn icon class="red--text text--lighten-2">
